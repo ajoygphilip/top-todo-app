@@ -2,18 +2,54 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdn.jsdelivr.net/npm/beercss@2.2.11/dist/cdn/beer.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/beercss@2.2.11/dist/cdn/beer.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/material-dynamic-colors@0.0.10/dist/cdn/material-dynamic-colors.min.js" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Todo App</title>
 </head>
 <body>
-    <header>Todo App</header>
+    <header class="green4 ">Todo App</header>
     <div class="sidebar">
-        <div class="today side-item">Today</div>
-        <div class="overdue side-item">Overdue</div>
+        <div class="today side-item"><h6>All</h6></div>
+        <div class="today side-item"><h6>Today</h6></div>
+        <div class="overdue side-item"><h6>Overdue</h6></div>
     </div>
-    <div class="main"></div>
-    <button> Add New</button>
-    
+    <div class="main">
+        <h3 class="active-header">Active Tab Title</h3>
+        <div class="row">
+            <label class="checkbox">
+              <input type="checkbox">
+              <span></span>
+            </label>
+            <div class="max">
+              <h6>Title</h6>
+            </div>
+            </button>
+          </div>
+          <div class="row">
+            <label class="checkbox">
+              <input type="checkbox">
+              <span></span>
+            </label>
+            <div class="max">
+              <h6>Title</h6>
+            </div>
+            </button>
+          </div>
+          <div class="row">
+            <label class="checkbox">
+              <input type="checkbox">
+              <span></span>
+            </label>
+            <div class="max">
+              <h6>Title</h6>
+            </div>
+            </button>
+          </div>
+    </div>
+    <button id="add-button" class="circle green4 extra"> +</button>
 </body>
 </html>
