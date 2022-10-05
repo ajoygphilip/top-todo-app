@@ -13,7 +13,7 @@ function togglePopup(){
 if (!localStorage.getItem('todoItems')) {
     localStorage.setItem("todoItems",JSON.stringify([]))
   }
-const todoItems=JSON.parse(localStorage.getItem('todoItems')) 
+let  todoItems=JSON.parse(localStorage.getItem('todoItems')) 
 
 addButton.addEventListener("click",togglePopup);
 
@@ -34,6 +34,7 @@ function renderTodo(items){
         items.forEach((item,index) => {
         let row= document.createElement("div");
         row.classList.add("row");
+        row.setAttribute("data-index",index)
 
         let label=document.createElement("label");
         label.classList.add("checkbox");
@@ -53,6 +54,8 @@ function renderTodo(items){
         let delIcon=document.createElement("i");
         delButton.classList.add("transparent" );
         delButton.classList.add("circle");
+        delButton.classList.add("delete-button");
+        delButton.addEventListener("click", deleteItem)
         delIcon.innerText="delete";
         delButton.appendChild(delIcon);
       
@@ -61,6 +64,8 @@ function renderTodo(items){
         editButton.classList.add("transparent" );
         editButton.classList.add("circle");
         editIcon.innerText="edit";
+        editButton.classList.add("edit-button");
+        
         editButton.appendChild(editIcon);
 
         row.appendChild(label);
@@ -92,5 +97,14 @@ function createItem(e){
     togglePopup();
     renderTodo(todoItems);
      
+}
+
+
+function deleteItem(e){
+    let index=parseInt(e.target.parentElement.dataset.index);
+    console.log(todoItems)
+    todoItems.splice(index,1);
+    localStorage.setItem("todoItems",JSON.stringify(todoItems));
+    renderTodo(todoItems);
 }
 
