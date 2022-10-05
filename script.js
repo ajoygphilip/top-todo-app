@@ -48,9 +48,19 @@ function renderTodo(items){
         let h6 = document.createElement("h6");
         h6.innerText=item.title;
         div.appendChild(h6);
+
+        let delButton=document.createElement("button");
+        let delIcon=document.createElement("i");
+        delButton.classList.add("transparent" );
+        delButton.classList.add("circle");
+        delButton.classList.add("delbutton");
+        delIcon.innerText="delete";
+        delButton.appendChild(delIcon);
+      
         
         row.appendChild(label);
         row.appendChild(div);
+        row.appendChild(delButton);
         itemsElm.append(row);
         
     });
