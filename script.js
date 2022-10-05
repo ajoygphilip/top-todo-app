@@ -31,7 +31,7 @@ function renderTodo(items){
 
     else{
         itemsElm.innerHTML="";
-        items.forEach(item => {
+        items.forEach((item,index) => {
         let row= document.createElement("div");
         row.classList.add("row");
 
@@ -48,7 +48,7 @@ function renderTodo(items){
         let h6 = document.createElement("h6");
         h6.innerText=item.title;
         div.appendChild(h6);
-        localStorage.setItem("todoItems",JSON.stringify(todoItems));
+        
         row.appendChild(label);
         row.appendChild(div);
         itemsElm.append(row);
@@ -72,7 +72,7 @@ function createItem(e){
     todoItems.push(new Todo(date,title));
     localStorage.setItem("todoItems",JSON.stringify(todoItems));
     document.querySelector("#itemtitle").value="";
-
+    
     togglePopup();
     renderTodo(todoItems);
      
