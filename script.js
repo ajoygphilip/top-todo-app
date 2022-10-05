@@ -53,13 +53,19 @@ function renderTodo(items){
         let delIcon=document.createElement("i");
         delButton.classList.add("transparent" );
         delButton.classList.add("circle");
-        delButton.classList.add("delbutton");
         delIcon.innerText="delete";
         delButton.appendChild(delIcon);
       
-        
+        let editButton=document.createElement("button");
+        let editIcon=document.createElement("i");
+        editButton.classList.add("transparent" );
+        editButton.classList.add("circle");
+        editIcon.innerText="edit";
+        editButton.appendChild(editIcon);
+
         row.appendChild(label);
         row.appendChild(div);
+        row.appendChild(editButton);
         row.appendChild(delButton);
         itemsElm.append(row);
         
