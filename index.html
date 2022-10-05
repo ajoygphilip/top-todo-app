@@ -27,31 +27,31 @@
       </button>
     
 
-    <form id="create-form" class="hide  field" action="">
+    <form id="create-form" method="post" class="hide  field" >
         
         <div class="create-popup">
             <fieldset>
                 <div class="field label suffix small border">
-                    <select>
+                    <select id="categorypicker">
                       <option>Inbox</option>
                       <option>Work</option>
                       <option>Shopping</option>
                     </select>
-                    <label class="active">Label</label>
+                    <label class="active">Category</label>
                     <i>arrow_drop_down</i>
                   </div>
                   <div class="field label prefix border extra">
                     <i>today</i>
-                    <input type="date">
+                    <input id="datepicker" type="date">
                     <label class="active">Select Due Date</label>
                   </div>
                   <div class="field border extra">
-                    <input type="text" placeholder="Enter item title">
+                    <input id="itemtitle" type="text" placeholder="Enter item title">
                   </div>
                   <div class="create-popup-buttons">
                     
                     <button id="cancel-button" type="button" class=" round red" >Cancel</button>
-                    <button id="create-button" class="round green5">Create</button>
+                    <button id="create-button"  type="button" form="create-form" class="round green5">Create</button>
                 </div>
             </fieldset>
         </div>
