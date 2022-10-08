@@ -1,4 +1,4 @@
-import { Todo } from './todo.js';
+import Todo from './todo';
 
 const addButton = document.getElementById('add-button');
 const popup = document.getElementById('create-form');
