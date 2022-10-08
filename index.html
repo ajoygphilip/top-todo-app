@@ -39,7 +39,7 @@
     </button>
 
     <form id="create-form" method="post" class="hide field">
-      <div class="create-popup">
+      <div class="popup">
         <fieldset>
           <div class="field label suffix small border">
             <select id="categorypicker">
@@ -58,8 +58,8 @@
           <div class="field border extra">
             <input id="itemtitle" type="text" placeholder="Enter item title" />
           </div>
-          <div class="create-popup-buttons">
-            <button id="cancel-button" type="button" class="round red">
+          <div class="popup-buttons">
+            <button id="cancel-create-button" type="button" class="round red">
               Cancel
             </button>
             <button
@@ -74,5 +74,43 @@
         </fieldset>
       </div>
     </form>
+
+    <form id="edit-form" method="post" class="hide field">
+      <div class="popup">
+        <fieldset>
+          <div class="field label suffix small border">
+            <select id="categorypicker">
+              <option>Inbox</option>
+              <option>Work</option>
+              <option>Shopping</option>
+            </select>
+            <label class="active">Category</label>
+            <i>arrow_drop_down</i>
+          </div>
+          <div class="field label prefix border extra">
+            <i>today</i>
+            <input id="edit-date" type="date" />
+            <label class="active">Select Due Date</label>
+          </div>
+          <div class="field border extra">
+            <input id="edit-title" type="text" placeholder="Enter item title" />
+          </div>
+          <div class="popup-buttons">
+            <button id="cancel-edit-button" type="button" class="round red">
+              Cancel
+            </button>
+            <button
+              id="edit-save-button"
+              type="button"
+              form="edit-form"
+              class="round green5"
+            >
+              Save
+            </button>
+          </div>
+        </fieldset>
+      </div>
+    </form>
+
   </body>
 </html>

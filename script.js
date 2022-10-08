@@ -1,14 +1,29 @@
 import Todo from './todo.js';
 
 const addButton = document.getElementById('add-button');
-const popup = document.getElementById('create-form');
-const cancelButton = document.getElementById('cancel-button');
+const createPopup = document.getElementById('create-form');
+
+const cancelCreateButton = document.getElementById('cancel-create-button');
+
 const createButton = document.getElementById('create-button');
 const itemsElm = document.querySelector('.items');
 
-function togglePopup() {
-  popup.classList.toggle('hide');
+function toggleCreatePopup() {
+  createPopup.classList.toggle('hide');
 }
+
+
+const editPopup = document.getElementById('edit-form');
+const cancelEditButton = document.getElementById('cancel-edit-button');
+const editSaveButton=document.getElementById('edit-save-button');
+const editDatePicker=document.getElementById('edit-date');
+const editTitleElem=document.getElementById('edit-title');
+
+
+function toggleEditPopup(params) {
+  editPopup.classList.toggle('hide');
+}
+
 
 if (!localStorage.getItem('todoItems')) {
   localStorage.setItem('todoItems', JSON.stringify([]));
@@ -16,11 +31,16 @@ if (!localStorage.getItem('todoItems')) {
 
 const todoItems = JSON.parse(localStorage.getItem('todoItems'));
 
-addButton.addEventListener('click', togglePopup);
+addButton.addEventListener('click', toggleCreatePopup);
 
-cancelButton.addEventListener('click', togglePopup);
+cancelCreateButton.addEventListener('click', toggleCreatePopup);
+cancelEditButton.addEventListener('click', toggleEditPopup);
 
 document.getElementById('datepicker').valueAsDate = new Date();
+
+function saveToLocalStorage(){
+  localStorage.setItem('todoItems', JSON.stringify(todoItems));
+}
 
 function renderTodo(items) {
   if (items.length === 0) {
@@ -57,7 +77,7 @@ function renderTodo(items) {
       function deleteItem(e) {
         const i = parseInt(e.target.parentElement.dataset.index);
         todoItems.splice(i, 1);
-        localStorage.setItem('todoItems', JSON.stringify(todoItems));
+        saveToLocalStorage();
         renderTodo(todoItems);
       }
       delButton.addEventListener('click', deleteItem);
@@ -70,7 +90,15 @@ function renderTodo(items) {
       editButton.classList.add('circle');
       editIcon.innerText = 'edit';
       editButton.classList.add('edit-button');
+      function editItem(e){
+        toggleEditPopup()
+        const i = todoItems[parseInt(e.target.parentElement.dataset.index)];
+        editSaveButton.setAttribute('data-target-index', index);
+        editDatePicker.valueAsDate= new Date(i.dueDate);
+        editTitleElem.value=i.title;
 
+      }
+      editButton.addEventListener("click",editItem);
       editButton.appendChild(editIcon);
 
       row.appendChild(label);
@@ -89,11 +117,27 @@ function createItem() {
   const date = document.querySelector('#datepicker').value;
   const title = document.querySelector('#itemtitle').value;
   todoItems.push(new Todo(date, title));
-  localStorage.setItem('todoItems', JSON.stringify(todoItems));
+  saveToLocalStorage();
   document.querySelector('#itemtitle').value = '';
 
-  togglePopup();
+  toggleCreatePopup();
   renderTodo(todoItems);
 }
-
 createButton.addEventListener('click', createItem);
+
+
+function saveEdit(){
+  const index=editSaveButton.getAttribute('data-target-index');
+  const date = editDatePicker.value;
+  const title = editTitleElem.value;
+  todoItems[index].date=date;
+  todoItems[index].title=title;
+  saveToLocalStorage();
+  editDatePicker.value = '';
+  editTitleElem.value = '';
+  
+  toggleEditPopup();
+  renderTodo(todoItems);
+}
+editSaveButton.addEventListener('click', saveEdit);
+
