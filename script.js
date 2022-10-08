@@ -13,6 +13,7 @@ function togglePopup() {
 if (!localStorage.getItem('todoItems')) {
   localStorage.setItem('todoItems', JSON.stringify([]));
 }
+
 const todoItems = JSON.parse(localStorage.getItem('todoItems'));
 
 addButton.addEventListener('click', togglePopup);
