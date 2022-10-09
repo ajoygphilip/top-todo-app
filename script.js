@@ -6,7 +6,8 @@ const createPopup = document.getElementById('create-form');
 const cancelCreateButton = document.getElementById('cancel-create-button');
 
 const createButton = document.getElementById('create-button');
-const itemsElm = document.querySelector('.items');
+const incompleteItemsElm = document.querySelector('.incomplete-items');
+const completedItemsElm = document.querySelector('.completed-items');
 
 function toggleCreatePopup() {
   createPopup.classList.toggle('hide');
@@ -46,9 +47,10 @@ function renderTodo(items) {
   if (items.length === 0) {
     const h3 = document.createElement('h5');
     h3.innerText = 'You are all caught up!';
-    itemsElm.appendChild(h3);
+    incompleteItemsElm.appendChild(h3);
   } else {
-    itemsElm.innerHTML = '';
+    incompleteItemsElm.innerHTML = '';
+    completedItemsElm.innerHTML = '';
     items.forEach((item, index) => {
       const row = document.createElement('div');
       row.classList.add('row');
@@ -61,8 +63,14 @@ function renderTodo(items) {
       function markCompleted(e){
         const i = todoItems[parseInt(e.target.parentElement.parentElement.dataset.index)];
         i.isCompleted=!i.isCompleted;
+        saveToLocalStorage();
+        e.target.parentElement.parentElement.classList.toggle('completed-row')
+        renderTodo(todoItems);
+        
+
       }
-      input.addEventListener("input",markCompleted)
+      input.addEventListener("input",markCompleted);
+      input.checked=item.isCompleted;
       const span = document.createElement('span');
       label.appendChild(input);
       label.appendChild(span);
@@ -110,12 +118,22 @@ function renderTodo(items) {
       row.appendChild(div);
       row.appendChild(editButton);
       row.appendChild(delButton);
-      itemsElm.append(row);
+
+      if(item.isCompleted){
+        completedItemsElm.append(row)
+      }
+      else{
+        incompleteItemsElm.append(row);
+      }
+      if (!completedItemsElm.innerHTML){
+        document.querySelector('.completed-container').style.display='none';
+      }else{
+        document.querySelector('.completed-container').style.display='block';
+      }
+      
     });
   }
 }
-
-renderTodo(todoItems);
 
 function createItem() {
   // const category = document.querySelector("#categorypicker").value;
@@ -145,4 +163,4 @@ function saveEdit(){
   renderTodo(todoItems);
 }
 editSaveButton.addEventListener('click', saveEdit);
-
+renderTodo(todoItems);
