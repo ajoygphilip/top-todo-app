@@ -58,6 +58,11 @@ function renderTodo(items) {
       label.classList.add('checkbox');
       const input = document.createElement('input');
       input.type = 'checkbox';
+      function markCompleted(e){
+        const i = todoItems[parseInt(e.target.parentElement.parentElement.dataset.index)];
+        i.isCompleted=!i.isCompleted;
+      }
+      input.addEventListener("input",markCompleted)
       const span = document.createElement('span');
       label.appendChild(input);
       label.appendChild(span);
