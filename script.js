@@ -171,24 +171,15 @@ renderTodo(todoItems);
 
 
 document.querySelector('.today').addEventListener("click",()=>{
-<<<<<<< HEAD
-  const today=new Date()
-  const todayItems=todoItems.filter(item=>new Date(item.dueDate).toDateString()===today.toDateString() );
-=======
   const today=new Date();
   const todayItems=todoItems.filter(item=>new Date(item.dueDate).getDate()===today.getDate() );
->>>>>>> datesort
   renderTodo(todayItems);
   
 })
 
 document.querySelector('.overdue').addEventListener("click",()=>{
   const today=new Date()
-<<<<<<< HEAD
-  const overdueItems=todoItems.filter(item=>new Date(item.dueDate).toDateString()>today.toDateString() );
-=======
   const overdueItems=todoItems.filter(item=>today.getDate()>new Date(item.dueDate).getDate());
->>>>>>> datesort
   renderTodo(overdueItems);
   
 })
