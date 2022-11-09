@@ -8,6 +8,7 @@ const cancelCreateButton = document.getElementById('cancel-create-button');
 const createButton = document.getElementById('create-button');
 const incompleteItemsElm = document.querySelector('.incomplete-items');
 const completedItemsElm = document.querySelector('.completed-items');
+const selectedDateSort='today';
 
 function toggleCreatePopup() {
   createPopup.classList.toggle('hide');
@@ -44,13 +45,14 @@ function saveToLocalStorage(){
 }
 
 function renderTodo(items) {
+    incompleteItemsElm.innerHTML = '';
+    completedItemsElm.innerHTML = '';
   if (items.length === 0) {
     const h3 = document.createElement('h5');
     h3.innerText = 'You are all caught up!';
     incompleteItemsElm.appendChild(h3);
   } else {
-    incompleteItemsElm.innerHTML = '';
-    completedItemsElm.innerHTML = '';
+    
     items.forEach((item, index) => {
       const row = document.createElement('div');
       row.classList.add('row');
@@ -66,9 +68,8 @@ function renderTodo(items) {
         saveToLocalStorage();
         e.target.parentElement.parentElement.classList.toggle('completed-row')
         renderTodo(todoItems);
-        
-
       }
+
       input.addEventListener("input",markCompleted);
       input.checked=item.isCompleted;
       const span = document.createElement('span');
@@ -135,6 +136,8 @@ function renderTodo(items) {
   }
 }
 
+
+
 function createItem() {
   // const category = document.querySelector("#categorypicker").value;
   const date = document.querySelector('#datepicker').value;
@@ -153,7 +156,7 @@ function saveEdit(){
   const index=editSaveButton.getAttribute('data-target-index');
   const date = editDatePicker.value;
   const title = editTitleElem.value;
-  todoItems[index].date=date;
+  todoItems[index].dueDate=date;
   todoItems[index].title=title;
   saveToLocalStorage();
   editDatePicker.value = '';
@@ -163,4 +166,24 @@ function saveEdit(){
   renderTodo(todoItems);
 }
 editSaveButton.addEventListener('click', saveEdit);
+
 renderTodo(todoItems);
+
+
+document.querySelector('.today').addEventListener("click",()=>{
+  const today=new Date();
+  const todayItems=todoItems.filter(item=>new Date(item.dueDate).getDate()===today.getDate() );
+  renderTodo(todayItems);
+  
+})
+
+document.querySelector('.overdue').addEventListener("click",()=>{
+  const today=new Date()
+  const overdueItems=todoItems.filter(item=>today.getDate()>new Date(item.dueDate).getDate());
+  renderTodo(overdueItems);
+  
+})
+
+document.querySelector(".all").addEventListener('click',()=>{
+  renderTodo(todoItems);
+})
