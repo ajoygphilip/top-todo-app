@@ -18,6 +18,11 @@ header {
   align-items: center;
 }
 
+.header-text {
+  font-size: 20;
+  font-weight: bold;
+}
+
 .sidebar {
   grid-row: 2/3;
   grid-column: 1/2;
