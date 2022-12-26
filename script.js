@@ -172,7 +172,7 @@ renderTodo(todoItems);
 
 document.querySelector('.today').addEventListener("click",()=>{
   const today=new Date();
-  const todayItems=todoItems.filter(item=>new Date(item.dueDate).getDate()===today.getDate() );
+  const todayItems=todoItems.filter(item=>new Date(item.dueDate).getDate()>=today.getDate() );
   renderTodo(todayItems);
   
 })
